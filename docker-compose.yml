@@ -1,0 +1,19 @@
+version: '3.3'
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'dbEcomerce'
+      MYSQL_USER: 'usr_grp1'
+      MYSQL_PASSWORD: 'pwd2022@'
+      MYSQL_ROOT_PASSWORD: 'pwdrt2022@'
+    ports:
+      - '3307:3306'
+    expose:
+      - '3307'
+    volumes:
+      - my-db:/var/lib/mysql
+
+volumes:
+  my-db:

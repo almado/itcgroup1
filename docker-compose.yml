@@ -1,5 +1,17 @@
 version: '3.3'
 services:
+  api:
+    build: .
+    restart: always
+    image: tomcat
+    container_name: tomcat
+    # volumes:
+    #   - ./api/index.html:/usr/local/tomcat/webapps/test/index.html
+    ports:
+      - 8080:8080
+    environment:
+      TZ: America/New_York
+  
   db:
     image: mysql:8.0
     restart: always
@@ -8,12 +20,16 @@ services:
       MYSQL_USER: 'usr_grp1'
       MYSQL_PASSWORD: 'pwd2022@'
       MYSQL_ROOT_PASSWORD: 'pwdrt2022@'
+      TZ: America/New_York
     ports:
-      - '3307:3306'
+      - '3306:3306'
     expose:
-      - '3307'
+      - '3306'
     volumes:
-      - my-db:/var/lib/mysql
+      - mysqldb-data:/var/lib/mysql
 
 volumes:
-  my-db:
+  myapi:
+  mysqldb-data: {}
+      # external: true
+
